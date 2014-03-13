@@ -13,7 +13,6 @@ confgen
 
 * Free software: BSD license
 
-============
 Introduction
 ============
 
@@ -28,8 +27,6 @@ Quick steps to useConfGen :
 * Build your template(s), confgen is based on ``jinja``, so if you want to build templates, just RTFD of ``jinja`` on http://jinja.pocoo.org/docs/
 * Generate your file(s)
 
-
-============
 Installation
 ============
 
@@ -41,12 +38,10 @@ Or::
 
 	$ pip install confgen
 
-=====
 Usage
 =====
 
-Command reference
-=================
+You have to call ``confgen`` from your command line.
 
 Command-line options
 --------------------
@@ -60,10 +55,6 @@ Command-line options
 -t    (--template) Your template file in text and jinja2 format
 -v    (--version) Display the version and exit
 
-Use
-===
-
-You have to call ``confgen`` from your command line.
 
 Examples
 ========
@@ -168,7 +159,9 @@ Now a second exemple, we just want to generate one whole file::
 	-----------------------------------------
 
 	*** File OneFile was generated ***
-	
+
+::
+
 	natjohan~# cat OneFile 
 	=> homer => D'oh!
 	=> marge => Now it's Marge's time to shine!
@@ -176,11 +169,9 @@ Now a second exemple, we just want to generate one whole file::
 	=> lisa => Trust in yourself and you can achieve anything.
 	=> maggie => It's your fault I can't talk!
 
-========
 Features
 ========
 
-=====
 To do
 =====
 
