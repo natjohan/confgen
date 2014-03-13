@@ -1,0 +1,192 @@
+=======
+confgen
+=======
+
+.. image:: https://badge.fury.io/py/confgen.png
+    :target: http://badge.fury.io/py/confgen
+
+.. image:: https://pypip.in/d/confgen/badge.png
+        :target: https://crate.io/packages/confgen?version=latest
+
+
+**ConfGen** is a little command utility that will help you to generate some configurations
+
+* Free software: BSD license
+* Documentation: http://confgen.rtfd.org.
+
+============
+Introduction
+============
+
+In my company, we didn't have a correct tool to generate configuration for our networking devices, just a piece 
+of crappy VBA code that doesn't really fit our needs. So I started to think about a little tool that can provides
+us simplicity. So, the main idea is that we often have some inputs data in an Excel file, and we use this file
+to build our configurations with one template.
+
+Quick steps to useConfGen :
+
+1. Collect your data and put it in a csv file, the first line of the file should be your title line with the name of 
+your variables
+
+2. Build your template(s), confgen is based on ``jinja``, so if you want to build templates, just RTFD of ``jinja`` on http://jinja.pocoo.org/docs/
+
+3. Generate your file(s)
+
+
+============
+Installation
+============
+
+At the command line::
+
+    $ easy_install confgen
+
+Or::
+
+	$ pip install confgen
+
+=====
+Usage
+=====
+
+Command reference
+=================
+
+Command-line options
+--------------------
+
+-a    (--append) Appending the ouput to the end of the file if it exists
+-d    (--delimiter) Delimiter for your CSV formatted file, default is ;
+-h    (--help) Display the help and exit
+-i    (--input) Input filename of your CSV
+-mo   (--multipleoutput) Generate on file per line, you must specify the name of the column where are the names of files to generate
+-so   (--simpleoutput) Output file name, stdout if not specified
+-t    (--template) Your template file in text and jinja2 format
+-v    (--version) Display the version and exit
+
+Use
+===
+
+You have to call ``confgen`` from your command line.
+
+Examples
+========
+
+One file per line
+-----------------
+
+Here is a little example in order to understand how it works, your Excel/Calc tab is the following::
+
+	**name**	**gender**		**description**											**beer_test**		**child**
+	homer		man				D'oh!													yes					yeah
+	marge		women			Now it's Marge's time to shine!		
+	bart		boy				Ay caramba!																	yes
+	lisa		girl			Trust in yourself and you can achieve anything.								yes
+	maggie		baby			It's your fault I can't talk!												yes
+
+which render in CSV format (with ``;`` for delimiter)::
+
+	name;gender;description;beer_test;child
+	homer;man;D'oh!;yes;yeah
+	marge;women;Now it's Marge's time to shine!;;
+	bart;boy;Ay caramba!;;yes
+	lisa;girl;Trust in yourself and you can achieve anything.;;yes
+	maggie;baby;It's your fault I can't talk!;;yes
+
+So now, here is a first template example::
+
+	Welcome {{ name }},
+
+	You're a {{ gender }}
+	Your favorite expression is : "{{ description }}" 
+	{%- if beer_test %}
+	You're allowed to drink beer
+	{%- else %}
+	/!\ You're not allowed to drink beer
+	{%- endif %}
+
+	{%- if child %}
+	Children playground access : ok
+	{%- endif %}
+
+We would like to generate one file per line, the name of file will be the ``name`` column::
+
+	natjohan~# confgen -i example.csv -t template.txt -mo name
+	-----------------------------------------
+
+	Input file : example.csv
+	Template file : template.txt
+	Delimiter : ; 
+
+	-----------------------------------------
+
+	File homer was generated 
+	File marge was generated 
+	File bart was generated 
+	File lisa was generated 
+	File maggie was generated 
+
+	*** Good job my buddy ! 5 Files were generated ***
+	
+	natjohan~# cat homer                                                
+	Welcome homer,
+
+	You're a man
+	Your favorite expression is : "D'oh!"
+	You're allowed to drink beer
+	Children playground access : ok
+	
+	natjohan~# cat marge 
+	Welcome marge,
+
+	You're a women
+	Your favorite expression is : "Now it's Marge's time to shine!"
+	/!\ You're not allowed to drink beer
+
+	natjohan~#  cat lisa 
+	Welcome lisa,
+
+	You're a girl
+	Your favorite expression is : "Trust in yourself and you can achieve anything."
+	/!\ You're not allowed to drink beer
+	Children playground access : ok  
+
+One file
+--------
+
+Now a second exemple, we just want to generate one whole file::
+
+	=> {{ name }} => {{ description }}
+
+
+::
+
+	natjohan~# confgen -i example.csv -t template.txt -so OneFile
+	-----------------------------------------
+
+	Input file : example.csv
+	Template file : template.txt
+	Delimiter : ; 
+
+	-----------------------------------------
+
+	*** File OneFile was generated ***
+	
+	natjohan~# cat OneFile 
+	=> homer => D'oh!
+	=> marge => Now it's Marge's time to shine!
+	=> bart => Ay caramba!
+	=> lisa => Trust in yourself and you can achieve anything.
+	=> maggie => It's your fault I can't talk!
+
+========
+Features
+========
+
+=====
+To do
+=====
+
+* Force option open(file,'x')
+* allow stdin for template
+* allow to choose directory to write files
