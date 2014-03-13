@@ -30,7 +30,7 @@ setup(
     package_dir={'confgen': 'confgen'},
     include_package_data=True,
     install_requires=[
-        'jinja2',
+        'Jinja2==2.5',
     ],
     license="BSD",
     zip_safe=False,
@@ -44,8 +44,6 @@ setup(
         "Programming Language :: Python :: 2",
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Environment :: Console',
         'Topic :: Utilities',
     ],
