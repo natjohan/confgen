@@ -25,12 +25,9 @@ to build our configurations with one template.
 
 Quick steps to useConfGen :
 
-1. Collect your data and put it in a csv file, the first line of the file should be your title line with the name of 
-your variables
-
-2. Build your template(s), confgen is based on ``jinja``, so if you want to build templates, just RTFD of ``jinja`` on http://jinja.pocoo.org/docs/
-
-3. Generate your file(s)
+* Collect your data and put it in a csv file, the first line of the file should be your title line with the name of your variables
+* Build your template(s), confgen is based on ``jinja``, so if you want to build templates, just RTFD of ``jinja`` on http://jinja.pocoo.org/docs/
+* Generate your file(s)
 
 
 ============
@@ -77,7 +74,7 @@ One file per line
 
 Here is a little example in order to understand how it works, your Excel/Calc tab is the following::
 
-	**name**	**gender**		**description**											**beer_test**		**child**
+	name     	gender		    description											    beer_test		    child
 	homer		man				D'oh!													yes					yeah
 	marge		women			Now it's Marge's time to shine!		
 	bart		boy				Ay caramba!																	yes
