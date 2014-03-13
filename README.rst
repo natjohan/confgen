@@ -12,7 +12,6 @@ confgen
 **ConfGen** is a little command utility that will help you to generate some configurations
 
 * Free software: BSD license
-* Documentation: http://confgen.rtfd.org.
 
 ============
 Introduction
@@ -154,7 +153,6 @@ One file
 Now a second exemple, we just want to generate one whole file::
 
 	=> {{ name }} => {{ description }}
-
 
 ::
 
