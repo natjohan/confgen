@@ -1,5 +1,6 @@
+=======
 History
--------
+=======
 
 0.0.1 - 15/05/2013 - Some dirty code to get it works
 
@@ -9,4 +10,4 @@ History
 
 0.0.4 - 06/10/2013 - Clean code,
 
-0.1.0 (from a CSV file through some templates.) - First release on PyPI.
+0.1.0 - 13/03/2014 - First release on PyPI.

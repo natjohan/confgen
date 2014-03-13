@@ -124,6 +124,8 @@ We would like to generate one file per line, the name of file will be the ``name
 
 	*** Good job my buddy ! 5 Files were generated ***
 	
+::
+
 	natjohan~# cat homer                                                
 	Welcome homer,
 
