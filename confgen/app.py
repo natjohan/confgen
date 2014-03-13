@@ -37,7 +37,7 @@ def main():
      ((http://jinja.pocoo.org/docs/) with some input data (CSV format) and output\
       one entire file or one file per line.\n ', epilog=u'-- twitter: @natjohan -- contact@natjohan.info')
 
-    parser.add_argument(u'-v',u'--version', action=u'version', version=u'%(prog)s 0.3 beta')
+    parser.add_argument(u'-v',u'--version', action=u'version', version=u'%(prog)s 0.1.1')
     parser.add_argument(u'-i',u'--input', help=u'Input file name CSV', type=argparse.FileType(u'rt'), required=True)
     parser.add_argument(u'-t',u'--template', help=u'Your template file', type=argparse.FileType(u'rt'), required=True)
     parser.add_argument(u'-d',u'--delimiter', help=u'Delimiter for your CSV file, default is ;', default=u';')
