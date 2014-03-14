@@ -34,7 +34,7 @@ def readTemplate(file):
 def main():
     parser = argparse.ArgumentParser(description='This script will populate a Jinja2 template \
      ((http://jinja.pocoo.org/docs/) with some input data (CSV format) and output\
-      one entire file or one file per line.\n ', epilog='--Hey Hey--')
+      one entire file or one file per line.\n ', epilog='-- Twitter : @natjohan -- <contact@natjohan.info> --')
 
     parser.add_argument('-v','--version', action='version', version='%(prog)s 0.1.4')
     parser.add_argument('-i','--input', help='Input file name CSV', type=argparse.FileType('rt'), required=True)
