@@ -1,29 +1,29 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
 import sys, argparse, csv
 from jinja2 import Environment, FileSystemLoader
-from io import open
 
-__author__ = u'@natjohan'
-__credits__= u'KISS philosophy : Keep it Simple, Stupid'
+__author__ = '@natjohan'
+__credits__= 'KISS philosophy : Keep it simple, stupid'
 
 def dieWith(msg) :
-    sys.stderr.write(u'Ooops ' + unicode(msg) + u'\n :( \n')
+    sys.stderr.write('Ooops ' + str(msg) + '\n :( \n')
     sys.exit(-1)
 
 def readCSV(input_file, csv_delimiter):
     file = open(input_file.name) # , encoding='utf-8')
     try:
         data = [row for row in csv.DictReader(file, delimiter=csv_delimiter)]
-    except Exception, e:
+    except Exception as e:
         dieWith(e)
     finally:
         file.close()
     return data
 
 def readTemplate(file):
-    env = Environment(loader=FileSystemLoader(u''), newline_sequence=u'\n')
+    env = Environment(loader=FileSystemLoader(''), newline_sequence='\n')
     #if template == 'stdin' :
     #    file = sys.stdin
     #else:
@@ -31,66 +31,69 @@ def readTemplate(file):
     template = env.get_template(file.name)
     return template
 
-
 def main():
-    parser = argparse.ArgumentParser(description=u'This script will populate a Jinja2 template \
+    parser = argparse.ArgumentParser(description='This script will populate a Jinja2 template \
      ((http://jinja.pocoo.org/docs/) with some input data (CSV format) and output\
-      one entire file or one file per line.\n ', epilog=u'-- twitter: @natjohan -- contact@natjohan.info')
+      one entire file or one file per line.\n ', epilog='--Hey Hey--')
 
-    parser.add_argument(u'-v',u'--version', action=u'version', version=u'%(prog)s 0.1.1')
-    parser.add_argument(u'-i',u'--input', help=u'Input file name CSV', type=argparse.FileType(u'rt'), required=True)
-    parser.add_argument(u'-t',u'--template', help=u'Your template file', type=argparse.FileType(u'rt'), required=True)
-    parser.add_argument(u'-d',u'--delimiter', help=u'Delimiter for your CSV file, default is ;', default=u';')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 0.1.3')
+    parser.add_argument('-i','--input', help='Input file name CSV', type=argparse.FileType('rt'), required=True)
+    parser.add_argument('-t','--template', help='Your template file', type=argparse.FileType('rt'), required=True)
+    parser.add_argument('-d','--delimiter', help='Delimiter for your CSV file, default is ;', default=';')
 
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument(u'-so',u'--simpleoutput',help=u'Output file name, stdout if not specified', nargs=u'?', const=u'stdout')
-    group.add_argument(u'-mo',u'--multipleoutput',help=u'Generate one file per line, you must specify the\
-     name of the column where are the names of files to generate, stdout if not specified', nargs=u'?', const=u'stdout')
+    group.add_argument('-so','--simpleoutput',help='Output file name, stdout if not specified', nargs='?', const='stdout')
+    group.add_argument('-mo','--multipleoutput',help='Generate one file per line, you must specify the\
+     name of the column where are the names of files to generate, stdout if not specified', nargs='?', const='stdout')
 
-    parser.add_argument(u'-a',u'--append', help=u'Appending the output to the end of the file if it exists',\
-     nargs=u'?', choices=[u'w', u'a'], const=u'a', default=u'w')
+    parser.add_argument('-a','--append', help='Appending the output to the end of the file if it exists',\
+     nargs='?', choices=['w', 'a'], const='a', default='w')
 
     args = parser.parse_args()
      
     # Show values
-    print u"-----------------------------------------\n"
-    print u"Input file : %s" % args.input.name
-    print u"Template file : %s" % args.template.name
-    print u"Delimiter : %s \n" % args.delimiter
-    print u"-----------------------------------------\n"
+    print ("-----------------------------------------\n")
+    print ("Input file : %s" % args.input.name )
+    print ("Template file : %s" % args.template.name )
+    print ("Delimiter : %s \n" % args.delimiter)
+    print ("-----------------------------------------\n")
+
+    # Check python Version
+    if not (sys.version_info[0] >= 3) :
+        dieWith('you should use python3.X or higher ! => http://www.python.org/download/ ')
 
     # Read CSV data & template
     data = readCSV(args.input, args.delimiter)
     template = readTemplate(args.template)
 
-    output_from_template = u''
+    output_from_template = ''
     # For outputting in a single file
     if args.simpleoutput :
         for row in data :
-            output_from_template += unicode(template.render(row)) + u'\n'
+            output_from_template += str(template.render(row)) + '\n'
         
-        if args.simpleoutput == u'stdout' :
+        if args.simpleoutput == 'stdout' :
             out = sys.stdout
             out.write(output_from_template)
         else :
             out = open(args.simpleoutput, args.append)
             out.write(output_from_template)
-            sys.stderr.write(u'*** File %s was generated ***\n' % args.simpleoutput)
+            sys.stderr.write('*** File %s was generated ***\n' % args.simpleoutput)
 
     # For outputting in multiple files
     else :
-        if args.multipleoutput == u'stdout' :
+        if args.multipleoutput == 'stdout' :
             for row in data :
-                output_from_template += unicode(template.render(row)) + u'\n'
+                output_from_template += str(template.render(row)) + '\n'
             out = sys.stdout
             out.write(output_from_template)
         else :
             counter = 0
             for row in data :
                 output_from_template = template.render(row)
-                outFilename = row[unicode(args.multipleoutput)]
+                outFilename = row[str(args.multipleoutput)]
                 out = open(outFilename, args.append)
                 out.write(output_from_template)
                 counter += 1
-                sys.stderr.write(u'File %s was generated \n' % outFilename )
-            sys.stderr.write(u'\n *** Good job my buddy ! %s Files were generated *** \n' % counter)
+                sys.stderr.write('File %s was generated \n' % outFilename )
+            sys.stderr.write('\n *** Good job my buddy ! %s Files were generated *** \n' % counter)

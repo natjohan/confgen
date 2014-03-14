@@ -19,7 +19,7 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='confgen',
-    version='0.1.1',
+    version='0.1.3',
     description='ConfGen is a little command utility that will \
     help you to generate some configurations thanks to jinja2 templating',
     long_description=readme + '\n\n' + history,
@@ -41,9 +41,10 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3'
         'Environment :: Console',
         'Topic :: Utilities',
     ],

@@ -8,4 +8,6 @@ History
 
 0.0.3 - 06/10/2013 - Clean code,
 
-0.1.0 - 13/03/2014 - First release on PyPI.
+0.1.1 - 13/03/2014 - First release on PyPI.
+
+0.1.3 - 14/03/2014 - Add python3 compatibility

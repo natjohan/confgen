@@ -12,6 +12,7 @@ confgen
 **ConfGen** is a little command utility that will help you to generate some configurations
 
 * Free software: BSD license
+* Tested on python 2.7 and 3.2
 
 Introduction
 ============
@@ -30,13 +31,35 @@ Quick steps to useConfGen :
 Installation
 ============
 
-At the command line::
+Linux
+-----
+
+Install setuptools : https://pypi.python.org/pypi/setuptools
+
+At the command line
+
+.. code-block:: console
 
     $ easy_install confgen
 
-Or::
+Or
+
+.. code-block:: console
 
 	$ pip install confgen
+
+Windows
+-------
+
+* Download python and install python from here_
+* Install setuptools : https://pypi.python.org/pypi/setuptools (save as, then double click)
+* Add `;C:\pythonXX;C:\pythonXX\scripts` where ``XX`` is your python version to your environment PATH
+* Open a cmd and
+
+.. code-block:: console
+
+	easy_install pip
+	pip install confgen
 
 Usage
 =====
@@ -96,7 +119,9 @@ So now, here is a first template example::
 	Children playground access : ok
 	{%- endif %}
 
-We would like to generate one file per line, the name of file will be the ``name`` column::
+We would like to generate one file per line, the name of file will be the ``name`` column
+
+.. code-block:: console
 
 	natjohan~# confgen -i example.csv -t template.txt -mo name
 	-----------------------------------------
@@ -114,10 +139,11 @@ We would like to generate one file per line, the name of file will be the ``name
 	File maggie was generated 
 
 	*** Good job my buddy ! 5 Files were generated ***
-	
-::
 
-	natjohan~# cat homer                                                
+So now, you should have 5 files called homer, marge, bart, lisa, maggie
+
+* homer::
+
 	Welcome homer,
 
 	You're a man
@@ -125,14 +151,25 @@ We would like to generate one file per line, the name of file will be the ``name
 	You're allowed to drink beer
 	Children playground access : ok
 	
-	natjohan~# cat marge 
+* marge::
+
 	Welcome marge,
 
 	You're a women
 	Your favorite expression is : "Now it's Marge's time to shine!"
 	/!\ You're not allowed to drink beer
 
-	natjohan~#  cat lisa 
+* bart::
+	
+	Welcome bart,
+
+	You're a boy
+	Your favorite expression is : "Ay caramba!"
+	/!\ You're not allowed to drink beer
+	Children playground access : ok
+
+* lisa::
+
 	Welcome lisa,
 
 	You're a girl
@@ -140,14 +177,25 @@ We would like to generate one file per line, the name of file will be the ``name
 	/!\ You're not allowed to drink beer
 	Children playground access : ok  
 
+* maggie::
+	
+	Welcome maggie,
+
+	You're a baby
+	Your favorite expression is : "It's your fault I can't talk!"
+	/!\ You're not allowed to drink beer
+	Children playground access : ok
+
 One file
 --------
 
-Now a second exemple, we just want to generate one whole file::
+Now a second exemple, we just want to generate one whole file
+
+* template.txt::
 
 	=> {{ name }} => {{ description }}
 
-::
+.. code-block:: console
 
 	natjohan~# confgen -i example.csv -t template.txt -so OneFile
 	-----------------------------------------
@@ -160,9 +208,8 @@ Now a second exemple, we just want to generate one whole file::
 
 	*** File OneFile was generated ***
 
-::
-
-	natjohan~# cat OneFile 
+* OneFile:: 
+	
 	=> homer => D'oh!
 	=> marge => Now it's Marge's time to shine!
 	=> bart => Ay caramba!
@@ -178,3 +225,5 @@ To do
 * Force option open(file,'x')
 * allow stdin for template
 * allow to choose directory to write files
+
+.. _here: http://www.python.org/downloads/
