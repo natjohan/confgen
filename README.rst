@@ -103,6 +103,10 @@ which render in CSV format (with ``;`` for delimiter)::
 	lisa;girl;Trust in yourself and you can achieve anything.;;yes
 	maggie;baby;It's your fault I can't talk!;;yes
 
+..
+
+Note : the fisrt line must be your title line with the name of your variables (no space in your variables' name)
+
 So now, here is a first template example::
 
 	Welcome {{ name }},
