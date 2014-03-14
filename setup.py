@@ -19,7 +19,7 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='confgen',
-    version='0.1.3',
+    version='0.1.4',
     description='ConfGen is a little command utility that will \
     help you to generate some configurations thanks to jinja2 templating',
     long_description=readme + '\n\n' + history,

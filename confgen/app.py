@@ -36,7 +36,7 @@ def main():
      ((http://jinja.pocoo.org/docs/) with some input data (CSV format) and output\
       one entire file or one file per line.\n ', epilog='--Hey Hey--')
 
-    parser.add_argument('-v','--version', action='version', version='%(prog)s 0.1.3')
+    parser.add_argument('-v','--version', action='version', version='%(prog)s 0.1.4')
     parser.add_argument('-i','--input', help='Input file name CSV', type=argparse.FileType('rt'), required=True)
     parser.add_argument('-t','--template', help='Your template file', type=argparse.FileType('rt'), required=True)
     parser.add_argument('-d','--delimiter', help='Delimiter for your CSV file, default is ;', default=';')
@@ -57,10 +57,6 @@ def main():
     print ("Template file : %s" % args.template.name )
     print ("Delimiter : %s \n" % args.delimiter)
     print ("-----------------------------------------\n")
-
-    # Check python Version
-    if not (sys.version_info[0] >= 3) :
-        dieWith('you should use python3.X or higher ! => http://www.python.org/download/ ')
 
     # Read CSV data & template
     data = readCSV(args.input, args.delimiter)
