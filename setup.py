@@ -30,7 +30,7 @@ setup(
     package_dir={'confgen': 'confgen'},
     include_package_data=True,
     install_requires=[
-        'Jinja2==2.5',
+        'Jinja2==2.11.3',
     ],
     license="BSD",
     zip_safe=False,
